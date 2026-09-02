@@ -45,8 +45,7 @@ jobs:
           fi
 
           BASE_HREF="$base_href" npm run build
-          cp deploy/settings.json public/settings.json
-          cp deploy/scene.compressed.ply public/scene.compressed.ply
+          cp -R deploy/. public/
           touch public/.nojekyll
 
       - name: Upload Pages artifact
