@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#080b12" />
+        <title>SuperSplat VR 示例</title>
+        <style>
+            :root {
+                color-scheme: dark;
+                font-family:
+                    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                background: #080b12;
+                color: #f6f7fb;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                margin: 0;
+                background:
+                    radial-gradient(circle at 15% 10%, rgba(242, 103, 34, 0.2), transparent 34rem),
+                    radial-gradient(circle at 90% 5%, rgba(80, 125, 255, 0.16), transparent 30rem), #080b12;
+            }
+
+            main {
+                width: min(1080px, calc(100% - 32px));
+                margin: 0 auto;
+                padding: 54px 0 72px;
+            }
+
+            .eyebrow {
+                color: #ff8a4c;
+                font-size: 13px;
+                font-weight: 750;
+                letter-spacing: 0.13em;
+                text-transform: uppercase;
+            }
+
+            h1 {
+                max-width: 760px;
+                margin: 12px 0 14px;
+                font-size: clamp(36px, 7vw, 68px);
+                line-height: 0.98;
+                letter-spacing: -0.05em;
+            }
+
+            .intro {
+                max-width: 720px;
+                margin: 0;
+                color: #aeb7c8;
+                font-size: clamp(16px, 2vw, 20px);
+                line-height: 1.65;
+            }
+
+            .notice {
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+                margin: 30px 0;
+                padding: 15px 18px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                background: rgba(255, 255, 255, 0.045);
+                color: #cbd2de;
+                line-height: 1.55;
+            }
+
+            .notice b {
+                flex: 0 0 auto;
+                color: #fff;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .card {
+                position: relative;
+                min-height: 210px;
+                overflow: hidden;
+                padding: 22px;
+                border: 1px solid rgba(255, 255, 255, 0.09);
+                border-radius: 20px;
+                background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+                color: inherit;
+                text-decoration: none;
+                transition:
+                    transform 160ms ease,
+                    border-color 160ms ease,
+                    background 160ms ease;
+            }
+
+            .card::after {
+                position: absolute;
+                right: -36px;
+                bottom: -62px;
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                background: var(--glow, #f26722);
+                content: "";
+                filter: blur(58px);
+                opacity: 0.2;
+            }
+
+            .card:hover,
+            .card:focus-visible {
+                transform: translateY(-4px);
+                border-color: rgba(255, 138, 76, 0.62);
+                background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+                outline: none;
+            }
+
+            .number {
+                color: #7f899b;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+            }
+
+            .card h2 {
+                margin: 46px 0 7px;
+                font-size: 25px;
+                letter-spacing: -0.025em;
+            }
+
+            .meta {
+                color: #aeb7c8;
+                font-size: 14px;
+            }
+
+            .open {
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+                margin-top: 19px;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            footer {
+                margin-top: 28px;
+                color: #737e91;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            footer a {
+                color: #aeb7c8;
+            }
+
+            @media (max-width: 780px) {
+                main {
+                    padding-top: 36px;
+                }
+
+                .grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 520px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .card {
+                    min-height: 178px;
+                }
+
+                .card h2 {
+                    margin-top: 28px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="eyebrow">SuperSplat · WebXR Test Gallery</div>
+            <h1>选择一个轻量场景，进入 VR。</h1>
+            <p class="intro">
+                所有入口都强制使用 WebGL，以便 Quest、PICO 等支持 WebXR 的头显浏览器显示 VR 按钮。
+            </p>
+
+            <div class="notice"><b>头显测试</b><span>打开场景后，等待加载完成，再点击底部工具栏里的 VR 图标。</span></div>
+
+            <section class="grid" aria-label="3D Gaussian Splat 示例">
+                <a class="card" href="../?webgl&amp;lang=zh-CN" style="--glow: #f26722">
+                    <span class="number">01 · 本地示例</span>
+                    <h2>金色龙雕像</h2>
+                    <div class="meta">1.01 MB · 默认场景</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+
+                <a
+                    class="card"
+                    href="../?webgl&amp;lang=zh-CN&amp;content=https%3A%2F%2Fraw.githubusercontent.com%2Fwilleastcott%2Fassets%2Fmain%2Fstatues%2Fangel.compressed.ply"
+                    style="--glow: #79a8ff"
+                >
+                    <span class="number">02 · 雕像</span>
+                    <h2>天使雕像</h2>
+                    <div class="meta">1.16 MB · 轻量</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+
+                <a
+                    class="card"
+                    href="../?webgl&amp;lang=zh-CN&amp;content=https%3A%2F%2Fraw.githubusercontent.com%2Fwilleastcott%2Fassets%2Fmain%2Fgrimlock-dino.compressed.ply"
+                    style="--glow: #6ed69a"
+                >
+                    <span class="number">03 · 玩具</span>
+                    <h2>机械恐龙</h2>
+                    <div class="meta">1.19 MB · 轻量</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+
+                <a
+                    class="card"
+                    href="../?webgl&amp;lang=zh-CN&amp;content=https%3A%2F%2Fraw.githubusercontent.com%2Fwilleastcott%2Fassets%2Fmain%2Ftoy-cat%2Fscene.compressed.ply"
+                    style="--glow: #d18cff"
+                >
+                    <span class="number">04 · 玩具</span>
+                    <h2>玩具猫</h2>
+                    <div class="meta">1.43 MB · 轻量</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+
+                <a
+                    class="card"
+                    href="../?webgl&amp;lang=zh-CN&amp;content=https%3A%2F%2Fraw.githubusercontent.com%2Fwilleastcott%2Fassets%2Fmain%2Fdrone%2Fscene.compressed.ply"
+                    style="--glow: #43c7e8"
+                >
+                    <span class="number">05 · 设备</span>
+                    <h2>无人机</h2>
+                    <div class="meta">1.88 MB · 中等</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+
+                <a
+                    class="card"
+                    href="../?webgl&amp;lang=zh-CN&amp;content=https%3A%2F%2Fraw.githubusercontent.com%2Fwilleastcott%2Fassets%2Fmain%2Fbarbie-bag%2Fscene.compressed.ply"
+                    style="--glow: #ff6ca8"
+                >
+                    <span class="number">06 · 物品</span>
+                    <h2>粉色手提包</h2>
+                    <div class="meta">2.65 MB · 中等</div>
+                    <span class="open">打开 Viewer →</span>
+                </a>
+            </section>
+
+            <footer>
+                外部示例资产来自
+                <a href="https://github.com/willeastcott/assets" target="_blank" rel="noreferrer">willeastcott/assets</a>；
+                页面由 <a href="https://github.com/playcanvas/supersplat-viewer">SuperSplat Viewer</a> 渲染。
+            </footer>
+        </main>
+    </body>
+</html>
