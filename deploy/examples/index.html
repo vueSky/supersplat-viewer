@@ -9,7 +9,13 @@
             :root {
                 color-scheme: dark;
                 font-family:
-                    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                    Inter,
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    'Segoe UI',
+                    sans-serif;
                 background: #080b12;
                 color: #f6f7fb;
             }
@@ -80,6 +86,62 @@
                 gap: 14px;
             }
 
+            .section-heading {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(260px, 0.75fr);
+                gap: 28px;
+                align-items: end;
+                margin: 64px 0 22px;
+            }
+
+            .section-kicker {
+                display: block;
+                margin-bottom: 9px;
+                color: #75d6bc;
+                font-size: 12px;
+                font-weight: 750;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .section-title {
+                margin: 0;
+                font-size: clamp(30px, 5vw, 48px);
+                line-height: 1.06;
+                letter-spacing: -0.04em;
+            }
+
+            .section-copy {
+                margin: 0;
+                color: #98a4b7;
+                line-height: 1.7;
+            }
+
+            .room-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .room-card {
+                min-height: 235px;
+                background: linear-gradient(145deg, rgba(47, 178, 148, 0.1), rgba(255, 255, 255, 0.025));
+            }
+
+            .room-card .number {
+                color: #75d6bc;
+            }
+
+            .tag {
+                display: inline-flex;
+                margin-top: 16px;
+                padding: 6px 9px;
+                border: 1px solid rgba(117, 214, 188, 0.23);
+                border-radius: 999px;
+                background: rgba(117, 214, 188, 0.08);
+                color: #b7eddf;
+                font-size: 12px;
+                font-weight: 650;
+            }
+
             .card {
                 position: relative;
                 min-height: 210px;
@@ -104,7 +166,7 @@
                 height: 180px;
                 border-radius: 50%;
                 background: var(--glow, #f26722);
-                content: "";
+                content: '';
                 filter: blur(58px);
                 opacity: 0.2;
             }
@@ -164,6 +226,11 @@
                 .grid {
                     grid-template-columns: repeat(2, minmax(0, 1fr));
                 }
+
+                .section-heading {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
             }
 
             @media (max-width: 520px) {
@@ -185,11 +252,11 @@
         <main>
             <div class="eyebrow">SuperSplat · WebXR Test Gallery</div>
             <h1>选择一个轻量场景，进入 VR。</h1>
-            <p class="intro">
-                所有入口都强制使用 WebGL，以便 Quest、PICO 等支持 WebXR 的头显浏览器显示 VR 按钮。
-            </p>
+            <p class="intro">所有入口都强制使用 WebGL，以便 Quest、PICO 等支持 WebXR 的头显浏览器显示 VR 按钮。</p>
 
-            <div class="notice"><b>头显测试</b><span>打开场景后，等待加载完成，再点击底部工具栏里的 VR 图标。</span></div>
+            <div class="notice">
+                <b>头显测试</b><span>打开场景后，等待加载完成，再点击底部工具栏里的 VR 图标。</span>
+            </div>
 
             <section class="grid" aria-label="3D Gaussian Splat 示例">
                 <a
@@ -259,10 +326,65 @@
                 </a>
             </section>
 
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">Room-scale · WebXR</span>
+                    <h2 class="section-title">室内沉浸场景</h2>
+                </div>
+                <p class="section-copy">默认视角位于室内。戴上头显后可直接观察空间尺度，并使用手柄移动、转向或传送。</p>
+            </div>
+
+            <section class="grid room-grid" aria-label="室内沉浸式 3D Gaussian Splat 示例">
+                <a class="card room-card" href="https://willeastcott.github.io/assets/gallery/" style="--glow: #55d8b2">
+                    <span class="number">07 · 展览空间</span>
+                    <h2>艺术画廊</h2>
+                    <div class="meta">15.6 MB · PlayCanvas WebXR</div>
+                    <span class="tag">推荐 · 轻量</span><br />
+                    <span class="open">进入沉浸场景 →</span>
+                </a>
+
+                <a
+                    class="card room-card"
+                    href="https://willeastcott.github.io/assets/lasercutter/"
+                    style="--glow: #ff8866"
+                >
+                    <span class="number">08 · 工作空间</span>
+                    <h2>激光切割工作室</h2>
+                    <div class="meta">18.8 MB · PlayCanvas WebXR</div>
+                    <span class="tag">设备细节丰富</span><br />
+                    <span class="open">进入沉浸场景 →</span>
+                </a>
+
+                <a
+                    class="card room-card"
+                    href="https://mirador3d.com/viewer/reading-room-5e7334aed434?lang=en"
+                    style="--glow: #f1c66c"
+                >
+                    <span class="number">09 · 室内空间</span>
+                    <h2>Reading Room 阅读室</h2>
+                    <div class="meta">Mirador3D · WebXR Viewer</div>
+                    <span class="tag">头显请选择 Fluid 画质</span><br />
+                    <span class="open">进入沉浸场景 →</span>
+                </a>
+
+                <a
+                    class="card room-card"
+                    href="https://mirador3d.com/viewer/georgetown-records-a068f0f22f41?lang=en"
+                    style="--glow: #8c91ff"
+                >
+                    <span class="number">10 · 商业空间</span>
+                    <h2>Georgetown Records 唱片店</h2>
+                    <div class="meta">Mirador3D · WebXR Viewer</div>
+                    <span class="tag">内容丰富 · Fluid 画质</span><br />
+                    <span class="open">进入沉浸场景 →</span>
+                </a>
+            </section>
+
             <footer>
-                外部示例资产来自
-                <a href="https://github.com/willeastcott/assets" target="_blank" rel="noreferrer">willeastcott/assets</a>；
-                页面由 <a href="https://github.com/playcanvas/supersplat-viewer">SuperSplat Viewer</a> 渲染。
+                示例资产与沉浸式入口来自
+                <a href="https://github.com/willeastcott/assets" target="_blank" rel="noreferrer">willeastcott/assets</a
+                >； 页面由 <a href="https://github.com/playcanvas/supersplat-viewer">SuperSplat Viewer</a> 与
+                <a href="https://mirador3d.com/en/explore">Mirador3D</a> 渲染。
             </footer>
         </main>
     </body>
